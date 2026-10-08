@@ -353,3 +353,7 @@ A successful template change:
 ---
 
 **Remember**: This template is infrastructure. Treat it with the care and rigor you'd give to any critical system that others depend on.
+
+## SFL reviewer operations
+
+Use the SFL review procedure in README.md for this repository. Deployment renders the actual default branch and supports only HemSoft or hemsoft-dev ownership. Preserve the required gate when processing is paused. Do not describe a proposed deployment as installed qualification.

@@ -44,11 +44,13 @@ npm run build
 #### 1. Create Access Tokens
 
 **GitHub Personal Access Token:**
+
 1. Visit https://github.com/settings/tokens/new
 2. Select scopes: `repo` (Full control of private repositories) and `read:org` (Read org and team membership)
 3. Copy the generated token (starts with `ghp_`)
 
 **Bitbucket App Password** (optional):
+
 1. Visit https://bitbucket.org/account/settings/app-passwords/
 2. Select permissions: `Pull requests: Read` and `Account: Read`
 3. Copy the generated password
@@ -62,6 +64,7 @@ npm run dev
 ```
 
 You'll see:
+
 ```
 👋 Welcome to prs!
 
@@ -72,6 +75,7 @@ Let's get you set up with GitHub and/or Bitbucket accounts.
 ```
 
 **If you choose "Yes":**
+
 - The interactive setup wizard will launch
 - You'll be prompted for GitHub accounts (username, org, environment variable name)
 - Optionally configure Bitbucket workspaces
@@ -79,11 +83,13 @@ Let's get you set up with GitHub and/or Bitbucket accounts.
 - Configuration saved to `~/hemsoft/prs/config.json`
 
 **If you choose "No":**
+
 - A minimal starter configuration will be created with empty accounts
 - You can add accounts later by running `prs init`
 - The app will run normally (showing "All clear! No PRs found." until accounts are configured)
 
 Alternatively, you can run the setup wizard directly:
+
 ```bash
 npm run dev init
 ```
@@ -91,18 +97,21 @@ npm run dev init
 #### 3. Set Environment Variables
 
 **Bash/Zsh** (`~/.bashrc` or `~/.zshrc`):
+
 ```bash
 export GITHUB_TOKEN_USERNAME="ghp_your_token_here"
 export BITBUCKET_TOKEN_WORKSPACE="your_app_password_here"
 ```
 
 **PowerShell** (`$PROFILE`):
+
 ```powershell
 $env:GITHUB_TOKEN_USERNAME="ghp_your_token_here"
 $env:BITBUCKET_TOKEN_WORKSPACE="your_app_password_here"
 ```
 
 **Fish** (`~/.config/fish/config.fish`):
+
 ```fish
 set -gx GITHUB_TOKEN_USERNAME "ghp_your_token_here"
 set -gx BITBUCKET_TOKEN_WORKSPACE "your_app_password_here"
@@ -270,11 +279,13 @@ src/
 If you see errors about missing PRs or authentication:
 
 1. **Check authentication status for all accounts:**
+
    ```bash
    prs auth status
    ```
 
 2. **Verify tokens are set in environment:**
+
    ```bash
    # On Windows (PowerShell)
    $env:GITHUB_TOKEN_USERNAME
@@ -290,10 +301,11 @@ If you see errors about missing PRs or authentication:
    - **"Rate limited"**: Too many API requests - wait and retry
 
 4. **Validate token manually:**
+
    ```bash
    # GitHub
    curl -H "Authorization: Bearer YOUR_TOKEN" https://api.github.com/user
-   
+
    # Bitbucket
    curl -u username:app_password https://api.bitbucket.org/2.0/user
    ```
@@ -313,6 +325,7 @@ If you see errors about missing PRs or authentication:
 ### Copilot SDK Issues
 
 For AI-powered features (optional):
+
 - Install Copilot CLI: `npm install -g @github/copilot-cli`
 - Authenticate: `copilot auth login`
 - Check status: `prs auth status` (shows Copilot status)
@@ -322,6 +335,7 @@ For AI-powered features (optional):
 ### Template-Based Design
 
 Built on the HemSoft CLI Template (`hs-cli-template`):
+
 - Modern tooling (TypeScript, ESLint, Prettier)
 - Pre-commit hooks for quality
 - AI integration ready via GitHub Copilot SDK
@@ -330,6 +344,7 @@ Built on the HemSoft CLI Template (`hs-cli-template`):
 ### GitHub Integration
 
 Uses Octokit (GitHub REST API) for authentication and data fetching:
+
 - Token-based authentication (Personal Access Tokens)
 - Multi-account support via multiple Octokit instances
 - GraphQL API for efficient PR queries
@@ -339,6 +354,7 @@ Uses Octokit (GitHub REST API) for authentication and data fetching:
 ### Bitbucket Integration
 
 Direct REST API integration:
+
 - App Password authentication (Basic Auth)
 - Multi-workspace support
 - Fetches repositories updated in last 90 days
@@ -374,6 +390,7 @@ MIT © HemSoft Developments
 ## 🔗 Credits
 
 Built with:
+
 - [@octokit/rest](https://github.com/octokit/rest.js) - GitHub REST API client
 - [@octokit/graphql](https://github.com/octokit/graphql.js) - GitHub GraphQL API client
 - [GitHub Copilot CLI SDK](https://github.com/github/copilot-cli-sdk) - AI-powered features
@@ -388,3 +405,11 @@ Built with:
 ---
 
 **Built with ❤️ by HemSoft Developments**
+
+## SFL pull request reviews
+
+The reviewer deployment is maintained through the [organization onboarding guide](https://github.com/hemsoft-dev/set-it-free-loop/blob/main/docs/ORGANIZATION-ONBOARDING.md). This SFL distribution supports `HemSoft` and `hemsoft-dev` repositories. Its deployment command renders the target repository's actual default branch into the workflow; copying the raw source template does not configure another repository.
+
+For a same-repository pull request targeting the default branch, register one review with `gh sfl review --repo hemsoft-dev/hs-cli-prs --pr NUMBER`. Wait for a clean review bound to the current head, base and context before merging. Forks and other target branches are outside reviewer admission. After a base or context change, update to a new head before registering another review. Inspect the installed version and drift with `gh sfl status --repo hemsoft-dev/hs-cli-prs`.
+
+`SFL_ENABLED=false` pauses request processing and result observation while context invalidation remains active. The required gate stays enforced. Re-enable processing to resume reviews, or follow the owner's approved uninstall procedure in the onboarding guide. If the repository default branch changes, freeze merges covered by the previous deployment, redeploy for the new default, and obtain fresh review evidence before resuming.
