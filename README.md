@@ -29,7 +29,7 @@ A professional CLI tool for monitoring pull requests across multiple platforms w
 
 ```bash
 # Clone the repository
-git clone https://github.com/HemSoft/hs-cli-prs.git
+git clone https://github.com/hemsoft-dev/hs-cli-prs.git
 cd hs-cli-prs
 
 # Install dependencies
